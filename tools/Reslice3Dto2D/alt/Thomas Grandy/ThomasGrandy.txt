@@ -1,0 +1,121 @@
+Von:	Grandy, Thomas <Thomas.Grandy@helios-gesundheit.de>
+Gesendet:	Dienstag, 21. April 2020 22:06
+An:	Viezzer, Darian Steven; Fenski, Maximilian
+Cc:	Schulz-Menger, Jeanette
+Betreff:	AW: [ext] 3D CS mathlab 
+Anlagen:	Reslicing.zip
+
+Hallo Darian,
+
+Vielen Dank, dass Du das übernimmst!
+
+Anbei 2 Matlab-Skripte als Beispiel und Funktionen, mit denen ich das bisher gemacht habe:
+
+- E_004_20180706.m für Dicom Datensätze bei denen das "Standard-LGE" gelaufen ist
+- E_017_MOCO_20180806.m für Dicom Datensätze bei denen das LGE in "Motion correction" 
+gelaufen ist
+
+Diese Skripte greifen dann auf Funktionen in "Functions" und "Tools" zu sowie auf die Dicom-
+Daten im Ordner "fn1"; die entsprechenden Daten kann Dir Max sicher zukommen lassen - es 
+sind einmal der Datensatz 004 und 017 aus dem 3DCS LGE Pilotaufnahmen (sollten auf dem M-
+Laufwerk liegen). Die neuen Dicom-Datensätze werden dann in entsprechende Ordner 
+gespeichert - Du musst die Pfade anpassen... 
+
+Der Datensatz rand_data_analysis_LV_1.mat war für die Randomisierung der Daten (damit man 
+beim Auswerten eine zufällige Reihenfolge hat und die zusammengehörigen Datensatzpaare 
+nicht unmittelbar hintereinander auswertet).
+
+unter dem Punkt "%% define file" ist die Nummer des jeweiligen Dicom-Pakete für die "CS", 
+"LGE" (= LGE SAX Paket), "LAX" (= LGE LAX Paket) und "CINE" (= Cine Pakete) 
+Akquisitionen einzutragen, damit das Skript dann die entsprechenden Teile aus dem 
+Gesamtdatensatz extrahieren kann. Das muss dann für die neuen Skripte entsprechend 
+angepasst werden.
+
+letztlich sind die relevanten Funktionen aber
+- get_slice_coordinates... und 
+- get_volume_coordinates... sowie 
+- get_slice_coordinates_and_change_resolution... 
+darin steckt das eigentliche Re-Slicing...
+
+Falls es dazu fragen gibt, kannst Du mir gerne jederzeit schreiben.
+
+Viele Grüße,
+Thomas
+
+
+
+
+
+ 
+ 
+Von: Viezzer, Darian Steven <darian-steven.viezzer@charite.de> 
+Gesendet: Montag, 20. April 2020 10:21:19 
+An: Fenski, Maximilian; Grandy, Thomas 
+Cc: Schulz-Menger, Jeanette 
+Betreff: [EXTERN] AW: [ext] 3D CS mathlab 
+ 
+Hallo Max,
+
+ich kann  mir das gerne anschauen und ggf. anpassen / erweitern. Wo liegt denn das bisherige Matlab-
+Programm und wie ist der aktuelle Stand dazu? Für die Entwicklung würde ich dann erstmal nur einen 
+Datensatz benötigen.
+
+Mit freundlichen Grüßen / With kind regards
+Darian Steven Viezzer
+Doktorand und wissenschaftlicher Mitarbeiter
+
+Charité Campus Buch
+Universitätsmedizin Berlin
+Experimental and Clinical Research Center
+eine gemeinsame Einrichtung von Charité und MDC
+AG Kardiovaskuläre MRT
+Lindenberger Weg 80
+13125 Berlin
+E-Mail: darian-steven.viezzer@charite.de
+
+Von: Fenski, Maximilian <Maximilian.Fenski@helios-gesundheit.de>  
+Gesendet: Freitag, 17. April 2020 08:48 
+An: Viezzer, Darian Steven <darian-steven.viezzer@charite.de>; Grandy, Thomas 
+<Thomas.Grandy@helios-gesundheit.de> 
+Cc: Schulz-Menger, Jeanette <jeanette.schulz-menger@charite.de> 
+Betreff: [ext] 3D CS mathlab 
+
+Hallo Thomas, hallo Darian,
+
+es geht um das 3D CS Projekt. In einem Schritt geht es um die Vergleichbarkeit der 
+Narbendarstellung zwischen 2D-LGE und 3D-CS LGE in KHK und Myokarditis-Patienten.
+
+Um die beiden Sequenzen zu vergleichen, müssen:
+
+1. Aus dem 3D-CS Datensatz SAX-Schnittbilder in der möglichst gleichen Positionierung und 
+Schnittdicke (7mm! mit 3mm Lücke zwischen den Schichten) wie in 2D-LGE 
+herausgerechnet werden. 
+2. Bei einem Teil der Patienten soll zudem ein SAX-Packet mit einer Schichtdicke von 1,25 
+mm herausgerechnet werden (1.25mm³ entspricht der Auflösung der 3D-CS-LGE Sequenz)
+
+Thomas hat hierfür schon ein mathlab-Programm geschrieben.  
+
+Darian, könntest du dir vorstellen, die das Programm anzugucken, an die o.g. Fragestellung 
+anzupassen?
+Ich würde dir dann die Datensätze der KHK und Myokarditis-Patienten zur Verfügung stellen.
+
+Liebe Grüße
+
+Max
+____________________________________ 
+Helios Klinikum Berlin-Buch GmbH 
+  
+Dr. Maximilian Fenski 
+Assistenzarzt 
+Kardiologie und Nephrologie 
+  
+Tel.: +49 30 9401-12975 
+  
+Schwanebecker Chaussee 50 – 13125 Berlin 
+www.helios-gesundheit.de/kliniken/berlin-buch 
+  
+Träger: Helios Klinikum Berlin-Buch GmbH 
+Geschäftsführer: Daniel Amrein 
+Sitz der Gesellschaft: Berlin 
+Handelsregister: AG Berlin Charlottenburg, HRB 152369 B 
+ 

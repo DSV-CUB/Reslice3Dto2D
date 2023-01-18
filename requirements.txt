@@ -1,0 +1,8 @@
+matplotlib==3.5.2
+numpy==1.23.5
+pandas==1.5.2
+pydicom==2.2.2
+PyQt5==5.15.4
+PyQt5Designer==5.14.1
+qimage2ndarray==1.8.3
+scipy==1.4.1
