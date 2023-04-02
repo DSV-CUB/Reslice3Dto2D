@@ -335,7 +335,7 @@ border-style:solid;</string>
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>110</y>
+      <y>100</y>
       <width>301</width>
       <height>441</height>
      </rect>
@@ -359,7 +359,7 @@ border-style:solid;</string>
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>110</y>
+      <y>100</y>
       <width>301</width>
       <height>441</height>
      </rect>
@@ -377,7 +377,7 @@ border-style:solid;</string>
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>300</y>
+      <y>290</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -413,7 +413,7 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>110</y>
+      <y>100</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -449,7 +449,7 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>530</y>
+      <y>520</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -485,7 +485,7 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>340</y>
+      <y>330</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -521,7 +521,7 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>90</y>
+      <y>80</y>
       <width>301</width>
       <height>20</height>
      </rect>
@@ -540,7 +540,7 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>90</y>
+      <y>80</y>
       <width>301</width>
       <height>20</height>
      </rect>
@@ -559,9 +559,9 @@ font-weight: bold;
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>570</y>
-      <width>91</width>
-      <height>18</height>
+      <y>590</y>
+      <width>20</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
@@ -571,105 +571,62 @@ font-weight: bold;
      </font>
     </property>
     <property name="text">
-     <string>export 3D</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="cb_export_exclude">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>570</y>
-      <width>181</width>
-      <height>18</height>
+      <x>610</x>
+      <y>610</y>
+      <width>20</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>export not resliced data</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="cb_export_original">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>570</y>
-      <width>241</width>
-      <height>18</height>
+      <x>610</x>
+      <y>630</y>
+      <width>20</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>export resliced and original data</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>601</y>
-      <width>121</width>
+      <x>890</x>
+      <y>550</y>
+      <width>141</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Slice Thickness:</string>
+     <string>Slice Thickness</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txt_slice_thickness">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>601</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-color: rgb(238, 238, 238);
-border-width : 2px;
-border-style:solid;</string>
-    </property>
-    <property name="inputMask">
-     <string>0.00</string>
-    </property>
-    <property name="text">
-     <string>.</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="cb_reslice_one">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>570</y>
-      <width>111</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>reslice only 1</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
       <x>610</x>
-      <y>630</y>
-      <width>460</width>
+      <y>570</y>
+      <width>20</width>
       <height>20</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 0, 0);</string>
-    </property>
     <property name="text">
-     <string>Slice Thickness: None = same as 2D, 0 = same as 3D, &gt;0 = fixed</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="wordWrap">
-     <bool>false</bool>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
@@ -703,6 +660,249 @@ font: 75 12pt &quot;Arial&quot;;</string>
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="dd_sliceprofile">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>570</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(238, 238, 238);
+border-width : 2px;
+border-style:solid;</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sb_slicethickness">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>570</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(238, 238, 238);
+border-width : 2px;
+border-style:solid;</string>
+    </property>
+    <property name="minimum">
+     <double>0.010000000000000</double>
+    </property>
+    <property name="value">
+     <double>6.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="opt_slicethickness_individual">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>570</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="opt_slicethickness_2D">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>590</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="opt_slicethickness_3D">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>610</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>550</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Slice Profile</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_slicethickness_2D">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>590</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>as 2D</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_slicethickness_3D">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>610</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>as 3D</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_slicethickness_mm">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>570</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>mm</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_export_3D">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>590</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>export 3D</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_reslice_one">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>570</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>reslice only 1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_export_exclude">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>610</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>export not resliced data</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_export_original">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>630</y>
+      <width>251</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>export resliced and original data</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>550</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Options</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>

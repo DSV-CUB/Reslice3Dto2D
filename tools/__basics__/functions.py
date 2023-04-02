@@ -1,7 +1,9 @@
 import os
 
+
 def check_class_has_method(obj, method_name):
     return hasattr(obj, method_name) and type(getattr(obj, method_name)) == types.MethodType
+
 
 def save_dcm(dcm, path, overwrite=False):
     name = ''.join(e for e in str(dcm[0x0010, 0x0010].value) if e.isalnum())

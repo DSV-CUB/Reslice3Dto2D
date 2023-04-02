@@ -6,6 +6,7 @@ import numpy as np
 import qimage2ndarray
 import copy
 import scipy.interpolate
+from scipy.stats import norm
 from datetime import datetime
 
 from tools import __basics__
@@ -32,10 +33,20 @@ class GUI(__basics__.parent_gui.Inheritance):
         self.btn_exclude_all.clicked.connect(self.btn_exclude_all_clicked)
         self.btn_reslice.clicked.connect(self.btn_reslice_clicked)
 
+        self.cb_reslice_one.stateChanged.connect(self.cb_reslice_one_clicked)
+        self.cb_export_3D.stateChanged.connect(self.cb_export_3D_clicked)
+        self.cb_export_exclude.stateChanged.connect(self.cb_export_exclude_clicked)
+        self.cb_export_original.stateChanged.connect(self.cb_export_original_clicked)
+
+        self.opt_slicethickness_individual.toggled.connect(self.opt_slicethickness_individual_clicked)
+        self.opt_slicethickness_2D.toggled.connect(self.opt_slicethickness_2D_clicked)
+        self.opt_slicethickness_3D.toggled.connect(self.opt_slicethickness_3D_clicked)
+
         self.lbl_image_view.setMouseTracking(True)
         self.lbl_image_view.mouseMoveEvent = self.lbl_image_view_move
-        self.export_path = None
 
+        self.dd_sliceprofile.addItems(["rectangular", "triangular", "cosine + 1", "sinc", "standard normal 2", "standard normal 5"])
+        self.export_path = None
         return
 
     def reset(self):
@@ -136,6 +147,55 @@ class GUI(__basics__.parent_gui.Inheritance):
         self.update_lists()
         return
 
+    def cb_reslice_one_clicked(self):
+        self.lbl_reslice_one.setEnabled(self.cb_reslice_one.isChecked())
+        return
+
+    def cb_export_3D_clicked(self):
+        self.lbl_export_3D.setEnabled(self.cb_export_3D.isChecked())
+        return
+
+    def cb_export_exclude_clicked(self):
+        self.lbl_export_exclude.setEnabled(self.cb_export_exclude.isChecked())
+        return
+
+    def cb_export_original_clicked(self):
+        self.lbl_export_original.setEnabled(self.cb_export_original.isChecked())
+        return
+
+    def opt_slicethickness_individual_clicked(self):
+        if self.opt_slicethickness_individual.isChecked():
+            self.sb_slicethickness.setEnabled(True)
+            self.lbl_slicethickness_mm.setEnabled(True)
+            self.lbl_slicethickness_2D.setEnabled(False)
+            self.lbl_slicethickness_3D.setEnabled(False)
+
+            self.opt_slicethickness_2D.setChecked(False)
+            self.opt_slicethickness_3D.setChecked(False)
+        return
+
+    def opt_slicethickness_2D_clicked(self):
+        if self.opt_slicethickness_2D.isChecked():
+            self.sb_slicethickness.setEnabled(False)
+            self.lbl_slicethickness_mm.setEnabled(False)
+            self.lbl_slicethickness_2D.setEnabled(True)
+            self.lbl_slicethickness_3D.setEnabled(False)
+
+            self.opt_slicethickness_individual.setChecked(False)
+            self.opt_slicethickness_3D.setChecked(False)
+        return
+
+    def opt_slicethickness_3D_clicked(self):
+        if self.opt_slicethickness_3D.isChecked():
+            self.sb_slicethickness.setEnabled(False)
+            self.lbl_slicethickness_mm.setEnabled(False)
+            self.lbl_slicethickness_2D.setEnabled(False)
+            self.lbl_slicethickness_3D.setEnabled(True)
+
+            self.opt_slicethickness_2D.setChecked(False)
+            self.opt_slicethickness_individual.setChecked(False)
+        return
+
     def btn_reslice_clicked(self):
         if not self.export_path is None:
             self.export_path = self.get_directory(None, path=self.export_path)
@@ -144,31 +204,27 @@ class GUI(__basics__.parent_gui.Inheritance):
 
         if not self.export_path is None and not self.export_path == "" and not self.dcm is None and len(self.dcm.obj) > 0:
 
-            evaluate_slice_thickness = self.txt_slice_thickness.text().strip()
-
-            if evaluate_slice_thickness == ".":
-                evaluate_slice_thickness = None # 2D data slice thickness
+            if self.opt_slicethickness_individual.isChecked():
+                evaluate_slice_thickness = float(self.sb_slicethickness.value())
+            elif self.opt_slicethickness_2D.isChecked():
+                evaluate_slice_thickness = None
+            elif self.opt_slicethickness_3D.isChecked():
+                evaluate_slice_thickness = int(0)
             else:
-                if evaluate_slice_thickness.endswith("."):
-                    evaluate_slice_thickness = evaluate_slice_thickness[:-1]
-
-                if float(evaluate_slice_thickness) == 0.0:
-                    evaluate_slice_thickness = int(0) # 3D data slice thickness
-                else:
-                    evaluate_slice_thickness = float(evaluate_slice_thickness) # any slice thickness
+                self.show_dialog("Slice Thickness not defined.", "Critical")
+                return
 
             data_3D = []
             data_3D_value = np.array([])
             data_3D_window_center = None
             data_3D_window_width = None
             data_3D_slice_thickness = 0
-            data_3D_z_resolution = 0
             data_3D_x = np.array([])
             data_3D_y = np.array([])
             data_3D_z = np.array([])
             timestamp = datetime.now().strftime("%y%m%d%H%M%S%f")
 
-            indeces = np.argwhere(np.array(self.dcm.series_num)==int(self.dd_series3D.currentText()[:self.dd_series3D.currentText().find(" ")])).flatten()
+            indeces = np.argwhere(np.array(self.dcm.series_num) == int(self.dd_series3D.currentText()[:self.dd_series3D.currentText().find(" ")])).flatten()
 
             for i in indeces:
                 read = self.dcm.obj[i]
@@ -204,7 +260,6 @@ class GUI(__basics__.parent_gui.Inheritance):
                 sorted_index = np.argsort(data_3D_z)
                 data_3D_z = data_3D_z[sorted_index]
                 data_3D_value = data_3D_value[sorted_index, :, :]
-                data_3D_z_resolution = abs(data_3D_z[1] - data_3D_z[0])
 
                 for i in range(len(self.indeces_include)):
 
@@ -272,7 +327,7 @@ class GUI(__basics__.parent_gui.Inheritance):
                                 n = n / np.linalg.norm(n)
 
                                 # number of points above and under the evaluation point along the normal
-                                num = int(round(slice_thickness / (2*data_3D_z_resolution)))
+                                num = int(round(np.round(slice_thickness, 2) / np.round((2*data_3D_slice_thickness), 2)))
                                 # distance of the points (close to 3D resolution)
                                 if num > 0:
                                     dist = slice_thickness / (2*num)
@@ -280,12 +335,34 @@ class GUI(__basics__.parent_gui.Inheritance):
                                     dist = 0
 
                                 # creates shifted slices, evaluates the interpolated values and weights them (here all the same weight = average)
+                                weights = []
                                 interpolate = np.zeros(product.shape[0])
+
                                 for k in range(-num, num+1):
+                                    if k == 0:
+                                        weights.append(1)
+                                    elif self.dd_sliceprofile.currentText() == "rectangular":
+                                        weights.append(1)
+                                    elif self.dd_sliceprofile.currentText() == "triangular":
+                                        weights.append((num-abs(k))/num)
+                                    elif self.dd_sliceprofile.currentText() == "cosine + 1":
+                                        weights.append((np.cos((k/num) * np.pi) + 1) / 2)
+                                    elif self.dd_sliceprofile.currentText() == "sinc":
+                                        weights.append(np.sinc(k/num))
+                                    elif self.dd_sliceprofile.currentText() == "standard normal 2":
+                                        weights.append(norm.pdf(2 * (k/num), loc=0, scale=1) / norm.pdf(0, loc=0, scale=1))
+                                    elif self.dd_sliceprofile.currentText() == "standard normal 5":
+                                        weights.append(norm.pdf(5 * (k/num), loc=0, scale=1) / norm.pdf(0, loc=0, scale=1))
+                                    else:
+                                        self.show_dialog("Slice profile not implemented.", "Critical")
+                                        return
+
                                     slice_2D = np.copy(product) + (n * dist * k)
                                     slice_2D[:,[0,1,2]] = slice_2D[:,[2,1,0]]
-                                    interpolate = interpolate + scipy.interpolate.interpn((data_3D_z,data_3D_y,data_3D_x), data_3D_value, slice_2D, bounds_error = False, fill_value = 0)
-                                interpolate = np.round(interpolate / (2*num+1), 0).astype(int)
+                                    interpolate = interpolate + weights[-1] * scipy.interpolate.interpn((data_3D_z,data_3D_y,data_3D_x), data_3D_value, slice_2D, bounds_error=False, fill_value=0)
+
+                                interpolate = np.round(interpolate / np.sum(weights), 0).astype(int)
+
 
 
                                 # writes back the interpolated values into the Pixel Data of the dicom
@@ -337,27 +414,6 @@ class GUI(__basics__.parent_gui.Inheritance):
                                 list_export.append(copy.copy(read))
 
             for dcm in list_export:
-                #patient = ''.join(e for e in str(dcm[0x0010, 0x0010].value) if e.isalnum())
-                #series = str(dcm[0x0020, 0x0011].value).zfill(4) + "_" + ''.join(e for e in str(dcm[0x0008, 0x103E].value) if e.isalnum())
-                #try:
-                #    name = str(dcm[0x0018, 0x1030].value) + "_" + str(dcm[0x0020, 0x0013].value)
-                #except:
-                #    name = "npn_" + str(dcm[0x0020, 0x0013].value) # no protocol name given
-
-                #os.makedirs(os.path.join(self.export_path, self.txt_name.text() + "_" + patient, series), exist_ok=True)
-                #dcm.save_as(os.path.join(self.export_path, self.txt_name.text() + "_" + patient, series, name + ".dcm"))
-
-                #name = ''.join(e for e in str(dcm[0x0010, 0x0010].value) if e.isalnum())
-                #seriesnumber = str(dcm[0x0020, 0x0011].value).zfill(4)
-                #serieddescription = ''.join(e for e in str(dcm[0x0008, 0x103E].value) if e.isalnum())
-                #uid = str(dcm[0x0008, 0x0018].value)
-
-                #dir_path = os.path.join(self.export_path, name, seriesnumber + "_" + serieddescription)
-                #os.makedirs(dir_path, exist_ok=True)
-                #file_path = os.path.join(dir_path, uid + ".dcm")
-                #dcm.save_as(file_path)
-
-
                 __basics__.functions.save_dcm(dcm, self.export_path)
 
 

@@ -6,3 +6,4 @@ PyQt5==5.15.4
 PyQt5Designer==5.14.1
 qimage2ndarray==1.8.3
 scipy==1.4.1
+statsmodels==0.13.0
