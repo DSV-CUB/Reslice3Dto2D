@@ -218,6 +218,9 @@ class GUI(__basics__.parent_gui.Inheritance):
             data_3D_value = np.array([])
             data_3D_window_center = None
             data_3D_window_width = None
+            data_3D_intercept = None
+            data_3D_slope = None
+
             data_3D_slice_thickness = 0
             data_3D_x = np.array([])
             data_3D_y = np.array([])
@@ -236,6 +239,10 @@ class GUI(__basics__.parent_gui.Inheritance):
                             data_3D_window_center = int(read[0x0028, 0x1050].value)
                         if [0x0028, 0x1051] in read:
                             data_3D_window_width = int(read[0x0028, 0x1051].value)
+                        if [0x0028, 0x1052] in read:
+                            data_3D_intercept = int(read[0x0028, 0x1052].value)
+                        if [0x0028, 0x1053] in read:
+                            data_3D_slope = int(read[0x0028, 0x1053].value)
 
                         data_3D_slice_thickness = np.asarray(read[0x0018, 0x0050].value, np.double)
 
@@ -378,12 +385,32 @@ class GUI(__basics__.parent_gui.Inheritance):
                                         read[0x0028, 0x1050].value = str(data_3D_window_center)
                                     else:
                                         read.add_new([0x0028, 0x1050], "DS", str(data_3D_window_center))
+                                elif [0x0028, 0x1050] in read:
+                                    read[0x0028, 0x1050].value = None
 
                                 if not data_3D_window_width is None:
                                     if [0x0028, 0x1051] in read:
                                         read[0x0028, 0x1051].value = str(data_3D_window_width)
                                     else:
                                         read.add_new([0x0028, 0x1051], "DS", str(data_3D_window_width))
+                                elif [0x0028, 0x1051] in read:
+                                    read[0x0028, 0x1051].value = None
+
+                                if not data_3D_intercept is None:
+                                    if [0x0028, 0x1052] in read:
+                                        read[0x0028, 0x1052].value = str(data_3D_window_width)
+                                    else:
+                                        read.add_new([0x0028, 0x1052], "DS", str(data_3D_window_width))
+                                elif [0x0028, 0x1052] in read:
+                                    read[0x0028, 0x1052].value = None
+
+                                if not data_3D_slope is None:
+                                    if [0x0028, 0x1053] in read:
+                                        read[0x0028, 0x1053].value = str(data_3D_window_width)
+                                    else:
+                                        read.add_new([0x0028, 0x1053], "DS", str(data_3D_window_width))
+                                elif [0x0028, 0x1053] in read:
+                                    read[0x0028, 0x1053].value = None
 
                                 # change some tags to make clear it is resliced
                                 new_series_num = str(data_3D[0][0x0020, 0x0011].value) + str(read[0x0020, 0x0011].value + len(self.list_series))
