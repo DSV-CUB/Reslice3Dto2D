@@ -1,6 +1,6 @@
 # Reslice3Dto2D
 
-![Reslice3Dto2D Logo](sourcecode\logo.png)
+![Reslice3Dto2D Logo](sourcecode/logo.png)
 
 Version 3.0
 
