@@ -61,7 +61,7 @@ def create_dataset(example_dicom, path_out, size = 11):
 
     # 2D in plane iso-center
     series_num = series_num + 1
-    os.makedirs(os.path.join(path_out_dir, "2D_inplane_iso"), exist_ok=True)
+    os.makedirs(os.path.join(path_out_dir, "2D_parplane"), exist_ok=True)
 
     array = np.random.randint(0, 1000, (size, size))
 
@@ -79,7 +79,7 @@ def create_dataset(example_dicom, path_out, size = 11):
     dcm[0x0028, 0x0011].value = size # Cols
 
     dcm[0x0020, 0x0011].value = int(series_num) # series number
-    dcm[0x0008, 0x103E].value = "2D_inplane_Validate" # Series Description
+    dcm[0x0008, 0x103E].value = "2D_parplane_Validate" # Series Description
     dcm[0x0008, 0x1030].value = "Reslice3Dto2DValidate" # Study description
     dcm[0x0018, 0x1030].value = "Reslice3Dto2DValidate" # Protocol Name
     dcm[0x0018, 0x0023].value = "2D" # MR Acquisition Type
@@ -99,7 +99,7 @@ def create_dataset(example_dicom, path_out, size = 11):
     if [0x0028, 0x1051] in dcm: # window width
         del dcm[0x0028, 0x1051]
 
-    dcm.save_as(os.path.join(path_out_dir, "2D_inplane_iso", "1.dcm"))
+    dcm.save_as(os.path.join(path_out_dir, "2D_parplane", "1.dcm"))
 
     # 2D perpendicular plane
     series_num = series_num + 1

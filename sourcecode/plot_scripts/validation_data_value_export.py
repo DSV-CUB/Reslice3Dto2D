@@ -2,7 +2,7 @@ import pydicom
 import os
 import numpy as np
 
-path = r"C:\Users\CMRT\Documents\DSV\3 - Promotion\Project ReslicingTool\6 - Analysis\R3D2Dexport\ValidationDataset"
+path = r"C:\Users\CMRT\Documents\DSV\3 - Promotion\Project ReslicingTool\6 - Analysis\ValidationData\ValidationDataset"
 
 wfile = open(os.path.join(path, "overview.txt"), "w")
 for root, _, files in os.walk(path):

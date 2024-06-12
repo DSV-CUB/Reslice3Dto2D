@@ -8,7 +8,7 @@ import numpy as np
 
 from sourcecode import basic_data, basic_functions
 
-path = r"C:\Users\CMRT\Documents\DSV\3 - Promotion\Project ReslicingTool\3 - Measurements\Validation_Data\rs3dto2d_validation_data_24.05.07.14.18.06.329133"
+path = r"C:\Users\CMRT\Documents\DSV\3 - Promotion\Project ReslicingTool\3 - Measurements\Validation_Data\rs3dto2d_validation_data_24.06.12.17.31.20.919858"
 
 
 data = basic_data.Setup()
