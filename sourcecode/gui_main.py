@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
+import os
 import numpy as np
 import qimage2ndarray
 import copy
@@ -10,10 +11,16 @@ from sourcecode import basic_data, basic_functions, basic_gui, gui_dialog_stack
 
 class GUI(basic_gui.Inheritance_MainWindow):
     def __init__(self, parent=None):
-        super().__init__(parent, __file__.replace(".py", ".ui"))
+        if getattr(sys, 'frozen', False):
+            uipath=os.path.join(sys._MEIPASS, "gui_main.ui")
+        else:
+            uipath = __file__.replace(".py", ".ui")
+
+        super().__init__(parent, uipath)
 
         self.data = basic_data.Setup()
 
+        self.btn_load.clicked.connect(self.lbl_hide.show)
         self.btn_load.clicked.connect(self.btn_load_clicked)
         self.btn_stack.clicked.connect(self.btn_stack_clicked)
         self.btn_export3D.setText(chr(129095))
@@ -51,6 +58,7 @@ class GUI(basic_gui.Inheritance_MainWindow):
 
         self.thread = None
         self.worker = None
+        self.was_loaded = False
         self.thread_object = QtCore.QObject()
         QtCore.QThread.currentThread().setObjectName("main")
         return
@@ -70,11 +78,15 @@ class GUI(basic_gui.Inheritance_MainWindow):
                 self.reslicetasks = {}
                 self.draw3D_index = 0
                 self.draw2D_index = 0
-                self.lbl_hide.hide()
                 self.data = data_load
                 self.fill_data()
+                self.was_loaded = True
             else:
                 self.show_dialog("No DICOM data found in given directory", "Information")
+
+        if self.was_loaded:
+            self.lbl_hide.hide()
+
         return
 
     def btn_stack_clicked(self):

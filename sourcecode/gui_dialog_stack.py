@@ -8,7 +8,12 @@ from sourcecode import basic_gui, basic_functions
 
 class GUI(basic_gui.Inheritance_Dialog):
     def __init__(self, parent):
-        super().__init__(parent, __file__.replace(".py", ".ui"))
+        if getattr(sys, 'frozen', False):
+            uipath=os.path.join(sys._MEIPASS, "gui_dialog_stack.ui")
+        else:
+            uipath = __file__.replace(".py", ".ui")
+
+        super().__init__(parent, uipath)
         self.result = None
 
         self.btn_stack.clicked.connect(self.btn_stack_clicked)

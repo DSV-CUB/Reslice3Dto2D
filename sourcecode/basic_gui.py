@@ -9,8 +9,14 @@ class Inheritance_MainWindow(QtWidgets.QMainWindow):
 
         self.ui = uic.loadUi(ui, self)
 
+        if getattr(sys, 'frozen', False):
+            logopath=os.path.join(sys._MEIPASS, "logo.png")
+        else:
+            logopath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "logo.png")
+
+
         try:
-            self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(os.path.realpath(__file__)), "logo.png")))
+            self.setWindowIcon(QtGui.QIcon(logopath))
         except:
             pass
 

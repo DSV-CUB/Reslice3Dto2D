@@ -255,7 +255,7 @@ background-color: rgb(207, 207, 207);
 font: 75 12pt &quot;Arial&quot;;</string>
     </property>
     <property name="text">
-     <string>Charité Universitätsmedizin Berlin | AG CMR | Version 3.0</string>
+     <string>Charité Universitätsmedizin Berlin | AG CMR | Version 3.1</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
