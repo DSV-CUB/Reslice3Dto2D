@@ -8,16 +8,17 @@ This sourcecode is part of the publication: _Viezzer, D. et al. Reslice3Dto2D: I
 reference 2D slices in cardiovascular magnetic resonance imaging._ (DOI: tba) 
 
 ## Installation
-The Reslice3Dto2D.exe contains the whole software as an executable for Windows, such that an installation is not necessary.
+The Reslice3Dto2D_Windows.exe contains the whole software as an executable for Windows, such that an installation is not necessary.
+The Reslice3Dto2D_macOS executable file contains the whole software as an executable for macOS, such that an installation is not necessary.
 Alternatively the below instructions installs the software for either Windows or macOS:
 
 The Reslice3Dto2D is implemented in Python (Version 3.8, Python Software Foundation). Accordingly, 
 Python needs to be installed in the specified version from https://www.python.org if it is not yet installed on the machine. 
 For Microsoft Windows ensure that during installation Python is added to the system environment variable PATH. 
-After download of the source code, unpack the compressed file. 
+After download of the source-code, unpack the compressed file and move into the scripts sub-directory. 
 For Microsoft Windows please run via double click the INSTALL_windows.bat to install all necessary Python site packages. 
 After successful installation, the tool can be started via RUN_windows.bat. For macOS users, please open a Terminal and 
-go to the directory of the Reslice3Dto2D tool. Run the following two commands, to make the command files executable:
+go to this directory. Run the following two commands, to make the command files executable:
 
 chmod 700 INSTALL_macOS.command
 
@@ -28,7 +29,7 @@ After successful installation, the RUN_macOS.command starts the application. In 
 site-packages of Python are necessary: numpy, pydicom, PyQt5, qimage2ndarray and scipy.
 
 ## Usage
-Instructions on usage are provided in the user manual.
+Instructions on usage are provided in the User Manual.
 
 ## Prerequisites
 The file ending is irrelevant as loaded data is checked for containing DICOM. However, the following DICOM tags must 
