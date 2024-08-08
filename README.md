@@ -10,6 +10,8 @@ reference 2D slices in cardiovascular magnetic resonance imaging._ (DOI: tba)
 ## Installation
 The Reslice3Dto2D_Windows.exe contains the whole software as an executable for Windows, such that an installation is not necessary.
 The Reslice3Dto2D_macOS executable file contains the whole software as an executable for macOS, such that an installation is not necessary.
+_The directly executable files are available here: DOI: 10.5281/zenodo.13273643_
+
 Alternatively the below instructions installs the software for either Windows or macOS:
 
 The Reslice3Dto2D is implemented in Python (Version 3.8, Python Software Foundation). Accordingly, 
